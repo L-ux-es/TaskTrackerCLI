@@ -29,10 +29,11 @@ def update_task(identification: int, description: str, status: str):
     task = get_task_by_id(tasks, identification)
     if task is not None:
         task[DESCRIPTION] = description
-        task[STATUS] = status
+        if status is not None:
+            task[STATUS] = status
         task['updated'] = datetime.now().strftime("%Y-%m-%d %H:%M")
         jsonHandling.write_json(tasks)
-        print("Task updated.")
+        print(f"Task whit id {identification} updated.")
     else:
         print(f"The task with id {id} don't exist.")
 
@@ -43,7 +44,7 @@ def delete_task(identification: int):
     if task is not None:
         tasks.remove(task)
         jsonHandling.write_json(tasks)
-        print("delete")
+        print(f"Task {task['id']} {task[DESCRIPTION]} deleted.")
     else:
         print(f"The task with id {identification} don't exist.")
 
@@ -72,7 +73,8 @@ def change_type_of_task(identification: int, type_task: str):
     task = get_task_by_id(tasks, identification)
     if task is not None:
         task[STATUS] = type_task
-        print(f"Task marked as {type_task}.")
+        jsonHandling.write_json(tasks)
+        print(f"Task wit id {identification} marked as {type_task}.")
     else:
         print(f"The task with id {identification} don't exist.")
 
@@ -97,7 +99,8 @@ def list_task(status="all"):
             if status == "all" or task[STATUS] == status:
                 count += 1
                 print(
-                    'ID: ' + str(task['id']) + ' DESCRIPTION: ' + task[DESCRIPTION] + ' STATUS: ' + task[STATUS] + ' CREATED: ' +
+                    'ID: ' + str(task['id']) + ' DESCRIPTION: ' + task[DESCRIPTION] + ' STATUS: ' + task[
+                        STATUS] + ' CREATED: ' +
                     task['created'] + ' UPDATED: ' + task['updated'])
         if count == 0:
             print(f"There are no tasks with type:{status}.")
