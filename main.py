@@ -82,11 +82,38 @@ def exit_command(args):
     print("Closing the console...")
 
 
+def get_user_input() -> list:
+    expression = str(input("Enter a command:\n")).split()
+    index = len(expression)
+    user_input = []
+    for i in range(len(expression)):
+        if expression[i] == '-m':
+            user_input.append(expression[i])
+            description, index = get_description(expression, i)
+            user_input.append(description)
+            break
+        else:
+            user_input.append(expression[i])
+    for i in range(index, len(expression)):
+        user_input.append(expression[i])
+    return user_input
+
+
+def get_description(expression, i):
+    description = ""
+    for j in range(i + 1, len(expression)):
+        if expression[j] != "-s":
+            description += expression[j] + " "
+        else:
+            return description.removesuffix(" "), j
+    return description, len(expression)
+
+
 def main():
     parser = create_commands()
     print("Task Tracker\n")
     while True:
-        user_input = input("Enter a command:\n ").split()
+        user_input = get_user_input()
         if not user_input:
             continue
         args = parser.parse_args(user_input)
