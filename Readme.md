@@ -46,6 +46,9 @@ Example:
 
     add -m Hi, this is a new task -s in-pgogress
 
+> [!NOTE]
+> When the status is not provided or is an incorrect value, todo is assigned
+
 #### update
 
 Update a task.
@@ -56,8 +59,7 @@ id : The id of the task to update.
 
 -s : Status of the task: todo, in-progress or done. Is not required.
 
-> .[!NOTE]
-> When the status is not provided or is an incorrect value, todo is assigned
+
 
 Example:
 
