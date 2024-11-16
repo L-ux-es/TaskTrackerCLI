@@ -10,7 +10,7 @@ View project in [roadmap.sh](https://www.roadmap.sh).
 
 1. Clone this repository
 2. Navigate to the project directory
-3. Execute main.py. Make sure you hace Python installed. 
+3. Execute main.py. Make sure you have Python installed. 
 
 ## Usage
 
